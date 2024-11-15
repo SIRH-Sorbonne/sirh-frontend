@@ -20,7 +20,6 @@
   </template>
   
   <script setup>
-  // Pas besoin de logique supplémentaire pour cette vue simple
   </script>
   
   <style scoped>
