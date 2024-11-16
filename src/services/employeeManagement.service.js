@@ -1,10 +1,29 @@
+import Employee from '../models/employee-management/Employee';
 import httpService from './http.service';
 
 const API_URL = '/employee_management';
 
 const employeeManagementService = {
-  getAllEmployees() {
-    return httpService.get(`${API_URL}/employees`);
+  async getAllEmployees() {
+    return httpService.get(`${API_URL}/employees`).then((response) => {
+      const employees = [];
+      response.data.forEach(element => {
+        const employee = new Employee({
+            id: element.id,
+            firstName: element.first_name,
+            lastName: element.last_name,
+            email: element.email,
+            phone: element.phone,
+            hire_date: element.hire_date,
+            exit_date: element.exit_date,
+            status: element.status,
+            created_at: element.created_at,
+            updated_at: element.updated_at
+        });
+        employees.push(employee);
+      });
+      return employees;
+    });
   },
 
   getEmployeeById(id) {
@@ -12,7 +31,8 @@ const employeeManagementService = {
   },
 
   createEmployee(employeeData) {
-    return httpService.post(`${API_URL}/employees`, employeeData);
+    const employee = new Employee(employeeData);
+    return httpService.post(`${API_URL}/employees`, employee.toBackendFormat());
   },
 
   updateEmployee(id, employeeData) {

@@ -1,10 +1,13 @@
 <template>
   <div id="app">
+    <AppHeader />
     <router-view />
   </div>
 </template>
 
-
+<script setup>
+import AppHeader from '@/views/Header.vue';
+</script>
 <style scoped>
 .logo {
   height: 6em;

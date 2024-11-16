@@ -1,30 +1,23 @@
 import axios from 'axios';
-import dotenv from 'dotenv'
-dotenv.config()
 
-const API_URL = import.meta.env.API_URL;
-const httpClient = axios.create({
-    baseURL: API_URL,
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
+//const API_URL = 'https://sirh-backend.onrender.com';
+const API_URL = 'http://localhost:3000';
 
 const httpService = {
     get(url, config = {}) {
-        return httpClient.get(url, config);
+        return axios.get(`${API_URL}${url}`, config);
     },
 
     post(url, data, config = {}) {
-        return httpClient.post(url, data, config);
+        return axios.post(`${API_URL}${url}`, data, config);
     },
 
     put(url, data, config = {}) {
-        return httpClient.put(url, data, config);
+        return axios.put(`${API_URL}${url}`, data, config);
     },
 
     delete(url, config = {}) {
-        return httpClient.delete(url, config);
+        return axios.delete(`${API_URL}${url}`, config);
     },
 };
 
